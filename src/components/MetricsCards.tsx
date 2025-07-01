@@ -27,9 +27,9 @@ const metrics = [
     color: "red"
   },
   {
-    title: "Balanced Stores",
-    value: "156",
-    change: "+8",
+    title: "Optimal Stock Level",
+    value: "89%",
+    change: "+2%",
     trend: "up",
     icon: CheckCircle,
     color: "green"

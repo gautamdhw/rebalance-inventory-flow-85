@@ -20,11 +20,11 @@ const forecastData = [
 ];
 
 const shortfallPredictions = [
-  { sku: "A123", productName: "Blue Cotton Shirt", predictedShortfall: 45, currentStock: 30, daysUntilShortfall: 5, store: "NYC-05" },
-  { sku: "D012", productName: "Summer Dress", predictedShortfall: 35, currentStock: 15, daysUntilShortfall: 3, store: "Miami-Beach" },
-  { sku: "G901", productName: "Polo Shirt", predictedShortfall: 28, currentStock: 25, daysUntilShortfall: 7, store: "Austin-Central" },
-  { sku: "J567", productName: "Casual Pants", predictedShortfall: 22, currentStock: 40, daysUntilShortfall: 12, store: "Portland-SW" },
-  { sku: "K890", productName: "Running Shoes", predictedShortfall: 18, currentStock: 35, daysUntilShortfall: 8, store: "Denver-Mall" }
+  { sku: "A123", productName: "Blue Cotton Shirt", predictedShortfall: 45, currentStock: 30, daysUntilShortfall: 5 },
+  { sku: "D012", productName: "Summer Dress", predictedShortfall: 35, currentStock: 15, daysUntilShortfall: 3 },
+  { sku: "G901", productName: "Polo Shirt", predictedShortfall: 28, currentStock: 25, daysUntilShortfall: 7 },
+  { sku: "J567", productName: "Casual Pants", predictedShortfall: 22, currentStock: 40, daysUntilShortfall: 12 },
+  { sku: "K890", productName: "Running Shoes", predictedShortfall: 18, currentStock: 35, daysUntilShortfall: 8 }
 ];
 
 const accuracyData = [
@@ -35,7 +35,6 @@ const accuracyData = [
 ];
 
 export function Forecasts() {
-  const [selectedStore, setSelectedStore] = useState("NYC-05");
   const [selectedSku, setSelectedSku] = useState("A123");
   const [timeRange, setTimeRange] = useState("7");
 
@@ -48,20 +47,6 @@ export function Forecasts() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Store</label>
-              <Select value={selectedStore} onValueChange={setSelectedStore}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="NYC-05">NYC-05 (5th Avenue)</SelectItem>
-                  <SelectItem value="LA-West">LA-West (Beverly Hills)</SelectItem>
-                  <SelectItem value="Chicago-Loop">Chicago-Loop</SelectItem>
-                  <SelectItem value="Miami-Beach">Miami-Beach</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-2">SKU</label>
               <Select value={selectedSku} onValueChange={setSelectedSku}>
@@ -217,7 +202,6 @@ export function Forecasts() {
                 <tr>
                   <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">SKU</th>
                   <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Product</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Store</th>
                   <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Current Stock</th>
                   <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Predicted Shortfall</th>
                   <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Days Until Shortfall</th>
@@ -229,7 +213,6 @@ export function Forecasts() {
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="py-3 px-4 font-mono text-sm">{item.sku}</td>
                     <td className="py-3 px-4 font-medium">{item.productName}</td>
-                    <td className="py-3 px-4 text-gray-600">{item.store}</td>
                     <td className="py-3 px-4 font-semibold">{item.currentStock}</td>
                     <td className="py-3 px-4">
                       <span className="text-red-600 font-semibold">-{item.predictedShortfall}</span>

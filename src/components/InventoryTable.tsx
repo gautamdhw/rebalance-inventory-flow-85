@@ -6,45 +6,40 @@ import { useState } from "react";
 
 const inventoryData = [
   {
-    storeId: "#301",
-    storeName: "NYC-5thAve",
     sku: "A12",
+    productName: "Blue Cotton Shirt",
     stockLevel: 150,
     forecast: 80,
     status: "surplus",
     difference: 70
   },
   {
-    storeId: "#107",
-    storeName: "LA-Market",
-    sku: "A12", 
+    sku: "B34", 
+    productName: "Denim Jeans",
     stockLevel: 10,
     forecast: 60,
     status: "deficit",
     difference: -50
   },
   {
-    storeId: "#205",
-    storeName: "Chicago-Loop",
-    sku: "B34",
+    sku: "C56",
+    productName: "White Sneakers",
     stockLevel: 95,
     forecast: 90,
     status: "balanced",
     difference: 5
   },
   {
-    storeId: "#143",
-    storeName: "Miami-Beach",
-    sku: "C56",
+    sku: "D78",
+    productName: "Summer Dress",
     stockLevel: 25,
     forecast: 75,
     status: "deficit",
     difference: -50
   },
   {
-    storeId: "#089",
-    storeName: "Seattle-Pike",
-    sku: "D78",
+    sku: "E90",
+    productName: "Rain Jacket",
     stockLevel: 180,
     forecast: 120,
     status: "surplus",
@@ -62,7 +57,7 @@ export function InventoryTable() {
     setTimeout(() => {
       toast({
         title: "Item Details",
-        description: `Viewing details for ${item.sku} at ${item.storeName}`,
+        description: `Viewing details for ${item.productName} (${item.sku})`,
       });
       setLoadingStates(prev => ({ ...prev, [index]: false }));
     }, 1000);
@@ -72,10 +67,10 @@ export function InventoryTable() {
     setLoadingStates(prev => ({ ...prev, [index]: true }));
     
     setTimeout(() => {
-      const action = item.status === 'deficit' ? 'Transfer Request' : 'Transfer Suggestion';
+      const action = item.status === 'deficit' ? 'Restock Request' : 'Excess Stock Alert';
       toast({
         title: `${action} Created`,
-        description: `${action} for ${item.sku} has been submitted for review`,
+        description: `${action} for ${item.productName} has been submitted for review`,
       });
       setLoadingStates(prev => ({ ...prev, [index]: false }));
     }, 1500);
@@ -111,8 +106,8 @@ export function InventoryTable() {
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">Store</th>
               <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">SKU</th>
+              <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">Product Name</th>
               <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">Stock Level</th>
               <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">Forecast</th>
               <th className="text-left py-4 px-6 text-sm font-medium text-gray-700">Status</th>
@@ -123,13 +118,10 @@ export function InventoryTable() {
             {inventoryData.map((item, index) => (
               <tr key={index} className="hover:bg-gray-50 transition-colors">
                 <td className="py-4 px-6">
-                  <div>
-                    <div className="font-medium text-gray-900">{item.storeName}</div>
-                    <div className="text-sm text-gray-500">{item.storeId}</div>
-                  </div>
+                  <span className="font-mono text-sm font-medium text-gray-900">{item.sku}</span>
                 </td>
                 <td className="py-4 px-6">
-                  <span className="font-mono text-sm font-medium text-gray-900">{item.sku}</span>
+                  <span className="font-medium text-gray-900">{item.productName}</span>
                 </td>
                 <td className="py-4 px-6">
                   <span className="font-semibold text-gray-900">{item.stockLevel}</span>
@@ -179,7 +171,7 @@ export function InventoryTable() {
                         disabled={loadingStates[index]}
                       >
                         {loadingStates[index] ? 'Processing...' : 
-                         (item.status === 'deficit' ? 'Request Transfer' : 'Suggest Transfer')}
+                         (item.status === 'deficit' ? 'Request Restock' : 'Report Excess')}
                       </Button>
                     )}
                   </div>
