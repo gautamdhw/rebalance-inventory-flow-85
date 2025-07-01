@@ -1,8 +1,9 @@
 
-import { Bell, User, Menu } from "lucide-react";
+import { Bell, User, Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 
 interface DashboardHeaderProps {
@@ -12,6 +13,7 @@ interface DashboardHeaderProps {
 export function DashboardHeader({ currentPage }: DashboardHeaderProps) {
   const { toggleSidebar } = useSidebar();
   const { toast } = useToast();
+  const { logout, storeId } = useAuth();
   const [notificationCount, setNotificationCount] = useState(3);
 
   const getPageTitle = (page: string) => {
@@ -43,6 +45,22 @@ export function DashboardHeader({ currentPage }: DashboardHeaderProps) {
       title: "User Profile",
       description: "Opening user profile settings...",
     });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast({
+        title: "Logged Out",
+        description: "You have been successfully logged out",
+      });
+    } catch (error) {
+      toast({
+        title: "Logout Error",
+        description: "Failed to logout properly",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -90,7 +108,16 @@ export function DashboardHeader({ currentPage }: DashboardHeaderProps) {
             <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-gray-600" />
             </div>
-            <span className="text-gray-700 font-medium">Admin User</span>
+            <span className="text-gray-700 font-medium">{storeId || 'Store Admin'}</span>
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleLogout}
+            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+          >
+            <LogOut className="w-4 h-4" />
           </Button>
         </div>
       </div>
