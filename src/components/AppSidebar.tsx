@@ -6,13 +6,9 @@ import {
   TrendingUp, 
   ArrowRightLeft, 
   MapPin, 
-  Settings,
   ChevronLeft,
   ChevronRight,
-  Activity,
-  History,
   Archive,
-  Users,
   Bell,
   Cog
 } from "lucide-react";
@@ -33,14 +29,10 @@ const items = [
   { id: 'inventory', title: "Inventory Overview", icon: Package },
   { id: 'forecasts', title: "Forecasts", icon: TrendingUp },
   { id: 'transfers', title: "Transfer Suggestions", icon: ArrowRightLeft },
-  { id: 'insights', title: "Insights & Analytics", icon: Activity },
-  { id: 'transfer-history', title: "Transfer History", icon: History },
   { id: 'sku-management', title: "SKU Management", icon: Archive },
-  { id: 'user-management', title: "User Management", icon: Users },
   { id: 'ml-settings', title: "ML Settings", icon: Cog },
   { id: 'alerts', title: "Alerts & Notifications", icon: Bell },
   { id: 'map', title: "Map View", icon: MapPin },
-  { id: 'settings', title: "Settings", icon: Settings },
 ];
 
 interface AppSidebarProps {
